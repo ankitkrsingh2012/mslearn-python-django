@@ -44,6 +44,7 @@ stages:
         source antenv/bin/activate
         python -m pip install --upgrade pip
         pip install setup
+        pip freeze > requirements.txt
         pip install -r requirements.txt
       workingDirectory: $(projectRoot)
       displayName: "Install requirements"
@@ -68,7 +69,8 @@ stages:
   jobs:
   - deployment: DeploymentJob
     pool:
-      vmImage: $(vmImageName)
+      #vmImage: $(vmImageName)
+      name: default
     environment: $(environmentName)
     strategy:
       runOnce:
